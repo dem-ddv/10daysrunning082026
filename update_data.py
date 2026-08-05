@@ -10,11 +10,11 @@ from bs4 import BeautifulSoup
 RACE_URL = 'https://results.zone/scm-24hour-2026/races/8907/results'
 OUT = Path(__file__).with_name('data.json')
 TARGETS = [
-    {'key':'Иван Заборский','site':'Заборский Иван','color':'#2457F5'},
-    {'key':'Сергей Вербицкий','site':'Вербицкий Сергей','color':'#FF6B0B'},
-    {'key':'Екатерина Азарова','site':'Азарова Екатерина','color':'#875AF5'},
-    {'key':'Андрей Толстопятенко','site':'Толстопятенко Андрей','color':'#079669'},
-    {'key':'Евгений Однорог','site':'Однорог Евгений','color':'#DF3760'},
+    {'key':'Иван Заборский','site':'Заборский Иван','color':'#2457F5','id':17},
+    {'key':'Сергей Вербицкий','site':'Вербицкий Сергей','color':'#FF6B0B','id':11},
+    {'key':'Екатерина Азарова','site':'Азарова Екатерина','color':'#875AF5','id':2},
+    {'key':'Андрей Толстопятенко','site':'Толстопятенко Андрей','color':'#079669','id':15},
+    {'key':'Евгений Однорог','site':'Однорог Евгений','color':'#DF3760','id':14},
 ]
 UA='Mozilla/5.0 (compatible; ultra-dashboard-updater/1.0; +https://github.com/)'
 
@@ -32,26 +32,6 @@ def parse_duration(s):
     except ValueError:
         pass
     raise ValueError(f'bad duration: {s!r}')
-
-def discover_urls(session):
-    found={}
-    for page in range(1,6):
-        r=session.get(RACE_URL,params={'page':page},timeout=30)
-        r.raise_for_status()
-        soup=BeautifulSoup(r.text,'html.parser')
-        links=soup.find_all('a',href=re.compile(r'/scm-24hour-2026/races/8907/results/\d+$'))
-        if not links and page>1: break
-        for a in links:
-            txt=norm(a.get_text(' ',strip=True))
-            href=urljoin(RACE_URL,a.get('href'))
-            for t in TARGETS:
-                if norm(t['site']) in txt:
-                    found[t['key']]=href
-        if len(found)==len(TARGETS): break
-    missing=[t['site'] for t in TARGETS if t['key'] not in found]
-    if missing:
-        raise RuntimeError('Не найдены страницы: '+', '.join(missing))
-    return found
 
 def local_baselines(segs):
     out=[]
@@ -101,7 +81,7 @@ def parse_athlete(html, expected_name, color):
 
 def main():
     s=requests.Session();s.headers.update({'User-Agent':UA,'Accept-Language':'ru,en;q=0.8'})
-    urls=discover_urls(s)
+    urls={t['key']: f"{RACE_URL}/{t['id']}" for t in TARGETS}
     data={}
     for t in TARGETS:
         u=urls[t['key']]
