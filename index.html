@@ -40,6 +40,82 @@
 
 
 @media(max-width:520px){.periodCtl{grid-column:span 1}.dayRangeTop span{display:none}.rangeTick{font-size:9px}.selfrow,.eventDetail,.triStat{grid-template-columns:1fr 1fr}.selfrow>div:first-child,.eventDetail>div:first-child,.triStat>div:first-child{grid-column:span 2}.selfhead{display:none}.toolbar{grid-template-columns:1fr}.compareRow{grid-template-columns:1fr 1fr;gap:8px}.compareHead{display:none}.compareRow>div:first-child{grid-column:span 2}.eventItem span{font-size:12px}.toolbar .athletes{grid-column:span 1}.kpi .v{font-size:22px}.chip{padding:7px 9px}.chart{height:260px}.card{padding:14px}.hero h1{font-size:39px}.axis{font-size:11.5px;font-weight:600}.heat{grid-template-columns:106px repeat(4,minmax(76px,1fr));gap:4px;min-width:426px}.heatAth{white-space:nowrap;overflow:visible;font-size:12px!important;padding-left:0!important;padding-right:2px!important}.heatAth .dot{display:none!important}.dayrestRow{grid-template-columns:116px repeat(var(--days),minmax(104px,1fr));gap:4px}.dayrestAth b{white-space:nowrap;font-size:12.5px}.dayrestAth .dot{display:none!important}.compareRow .dot,.selfrow .dot,.eventDetail .dot,.triStat .dot{display:none!important}.athleteLabel,.dayrestCell .athleteLabel{display:inline-block!important;position:relative;white-space:nowrap;padding-bottom:3px;line-height:1.15;width:auto!important;max-width:100%}.athleteLabel:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:999px;background:var(--athlete-color);opacity:.72}.best6Range{display:inline-block;margin-left:7px;white-space:nowrap}.tlname{overflow:visible;text-overflow:clip}.tlname .athleteLabel{font-size:12.5px}}
+
+@media(min-width:901px){
+  .toolbar>.ctl:nth-child(2){justify-self:start;width:320px;max-width:100%}
+  .toolbar>.ctl:nth-child(2) .seg{width:320px;max-width:100%}
+}
+
+
+@media(max-width:520px){
+  #best6 .triStat{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 10px;align-items:start}
+  #best6 .triStat>div:first-child{grid-column:1/-1;margin-bottom:5px}
+  #best6 .triStat>div:not(:first-child){min-width:0}
+  #best6 .triStat b{font-size:14px}
+  #best6 .triMetricLabel{font-size:9.5px!important;line-height:1.15}
+  #best6 .triMeta,#best6 .triExplain{font-size:10.5px!important;line-height:1.25;max-width:none}
+}
+
+
+@media(min-width:521px){
+  #best6 .triStat{
+    grid-template-columns:170px repeat(3,minmax(0,1fr));
+    column-gap:28px;
+    row-gap:0;
+    align-items:start;
+    padding:18px 0;
+  }
+  #best6 .triStat>div:first-child{
+    align-self:start;
+    padding-top:2px;
+  }
+  #best6 .triStat>div:not(:first-child){
+    min-width:0;
+    justify-self:start;
+  }
+  #best6 .triMetricLabel{
+    display:block!important;
+    margin-bottom:5px;
+  }
+  #best6 .triStat b{
+    font-size:16px;
+  }
+  #best6 .triMeta,
+  #best6 .triExplain{
+    max-width:180px;
+  }
+}
+
+
+@media(min-width:521px){
+  #best6{max-width:900px}
+  #best6 .triStat{
+    display:grid;
+    grid-template-columns:180px 170px 190px 170px;
+    gap:0 28px;
+    align-items:start;
+    justify-content:start;
+    padding:16px 0;
+  }
+  #best6 .triStat>div:first-child{
+    grid-column:auto !important;
+    margin-bottom:0 !important;
+    align-self:start;
+    padding-top:2px;
+  }
+  #best6 .triStat>div:not(:first-child){
+    min-width:0;
+    justify-self:start;
+  }
+  #best6 .triMetricLabel{
+    display:block!important;
+    margin-bottom:5px;
+  }
+  #best6 .triStat b{font-size:16px}
+  #best6 .triMeta,#best6 .triExplain{max-width:180px}
+  #best6 .selfhead{display:none}
+}
+
 </style></head><body><div class="wrap">
 <div class="hero"><div><div class="eyebrow">240 часов · текущий срез · <span id="dataUpdatedAt" style="font-weight:500;letter-spacing:.04em;text-transform:none">—</span></div><h1>Гонка изнутри</h1><p>Пять лидеров десятисуточной гонки. Сравнение дистанции, ходового темпа, отдыха и того, как меняется гонка в разное время суток.</p></div><div class="stamp"><div id="stamp"></div></div></div>
 <div class="toolbar">
