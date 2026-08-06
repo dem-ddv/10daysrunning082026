@@ -18,9 +18,30 @@
 .resizablePair .chart{min-width:0}
 #paceSmoothInfo{white-space:nowrap}
 @media(max-width:900px){.resizablePair{display:grid;grid-template-columns:1fr;gap:16px}.splitHandle{display:none}.periodCtl{grid-column:span 2}.dayRange{min-width:0}.wrap{padding:18px 14px 50px}.hero{align-items:flex-start;flex-direction:column}.stamp{white-space:normal}.toolbar{position:relative;top:0;grid-template-columns:1fr 1fr}.span8,.span7,.span6,.span5,.span4{grid-column:span 12}.kpis{grid-template-columns:repeat(2,1fr)}.kpis .kpi:last-child{grid-column:span 2}.insights{grid-template-columns:1fr}.chart{height:285px}.chart.tall{height:330px}.heat{grid-template-columns:82px repeat(4,minmax(75px,1fr));min-width:420px}.heatwrap{overflow-x:auto}.toolbar .athletes{grid-column:span 2}.tlrow{grid-template-columns:80px 1fr}.tltrack{min-width:540px}}
-@media(max-width:520px){.periodCtl{grid-column:span 1}.dayRangeTop span{display:none}.rangeTick{font-size:9px}.selfrow,.triStat{grid-template-columns:1fr 1fr}.selfrow>div:first-child,.triStat>div:first-child{grid-column:span 2}.eventDetail{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 8px;align-items:start}.eventDetail>div:first-child{grid-column:span 3}.eventDetail>div:not(:first-child){min-width:0}.eventDetail>div:not(:first-child)>b{font-size:14px;white-space:nowrap}.eventMetricLabel{display:block}.eventDelta{font-size:10.5px!important;line-height:1.25}.selfhead{display:none}.toolbar{grid-template-columns:1fr}.compareRow{grid-template-columns:1fr 1fr;gap:8px}.compareHead{display:none}.compareRow>div:first-child{grid-column:span 2}.eventItem span{font-size:12px}.toolbar .athletes{grid-column:span 1}.kpi .v{font-size:22px}.chip{padding:7px 9px}.chart{height:260px}.card{padding:14px}.hero h1{font-size:39px}.axis{font-size:11.5px;font-weight:600}.heat{grid-template-columns:132px repeat(4,minmax(78px,1fr));min-width:464px}.heatAth{white-space:nowrap;overflow:visible;font-size:12.5px!important;padding-left:3px!important}.heatAth .dot{display:none!important}.dayrestRow{grid-template-columns:150px repeat(var(--days),minmax(110px,1fr))}.dayrestAth b{white-space:nowrap;font-size:13.5px}.dayrestAth .dot{display:none!important}.compareRow .dot,.selfrow .dot,.eventDetail .dot,.triStat .dot{display:none!important}.athleteLabel,.dayrestCell .athleteLabel{display:inline-block!important;position:relative;white-space:nowrap;padding-bottom:3px;line-height:1.15;width:auto!important;max-width:100%}.athleteLabel:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:999px;background:var(--athlete-color);opacity:.72}.best6Range{display:inline-block;margin-left:7px;white-space:nowrap}.triMetricLabel{display:block!important;font-size:10px!important;font-weight:750;text-transform:uppercase;letter-spacing:.045em;margin-bottom:3px;color:var(--muted)}.triMeta,.triExplain{font-size:11px!important}.tlname{overflow:visible;text-overflow:clip}.tlname .athleteLabel{font-size:12.5px}}
+.dayRangeTop span{display:none}.rangeTick{font-size:9px}.selfrow,.triStat{grid-template-columns:1fr 1fr}.selfrow>div:first-child,.triStat>div:first-child{grid-column:span 2}.eventDetail{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 8px;align-items:start}.eventDetail>div:first-child{grid-column:span 3}.eventDetail>div:not(:first-child){min-width:0}.eventDetail>div:not(:first-child)>b{font-size:14px;white-space:nowrap}.eventMetricLabel{display:block}.eventDelta{font-size:10.5px!important;line-height:1.25}.selfhead{display:none}.toolbar{grid-template-columns:1fr}.compareRow{grid-template-columns:1fr 1fr;gap:8px}.compareHead{display:none}.compareRow>div:first-child{grid-column:span 2}.eventItem span{font-size:12px}.toolbar .athletes{grid-column:span 1}.kpi .v{font-size:22px}.chip{padding:7px 9px}.chart{height:260px}.card{padding:14px}.hero h1{font-size:39px}.axis{font-size:11.5px;font-weight:600}.heat{grid-template-columns:108px repeat(4,minmax(72px,1fr));min-width:414px}.heatAth{white-space:nowrap;overflow:visible;font-size:12px!important;padding-left:3px!important}.heatAth .dot{display:none!important}.dayrestGrid{min-width:620px}.dayrestRow{grid-template-columns:112px repeat(var(--days),minmax(98px,1fr))}.dayrestAth{padding-left:8px;padding-right:6px}.dayrestAth b{white-space:nowrap;font-size:12.5px}.dayrestAth .dot{display:none!important}.compareRow .dot,.selfrow .dot,.eventDetail .dot,.triStat .dot{display:none!important}.athleteLabel,.dayrestCell .athleteLabel{display:inline-block!important;position:relative;white-space:nowrap;padding-bottom:3px;line-height:1.15;width:auto!important;max-width:100%}.athleteLabel:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:999px;background:var(--athlete-color);opacity:.72}.best6Range{display:inline-block;margin-left:7px;white-space:nowrap}.triMetricLabel{display:block!important;font-size:10px!important;font-weight:750;text-transform:uppercase;letter-spacing:.045em;margin-bottom:3px;color:var(--muted)}.triMeta,.triExplain{font-size:11px!important}.tlname{overflow:visible;text-overflow:clip}.tlname .athleteLabel{font-size:12.5px}}
+
+/* v14 – athlete labels + update status */
+.athleteLabel{font-size:12px;font-weight:600;white-space:nowrap;line-height:1.2}
+.dot{flex:0 0 auto}
+.dayrestRow{grid-template-columns:116px repeat(var(--days),minmax(104px,1fr));gap:4px}
+.dayrestAth b{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:12px;font-weight:600}
+.dayrestAth .dot{margin-right:0!important}
+.heat{grid-template-columns:140px repeat(4,1fr)}
+.heatAth{display:flex!important;align-items:center!important;gap:7px;padding-left:10px!important;white-space:nowrap;overflow:visible}
+.heatAth .dot{margin-right:0!important}
+.compareRow{grid-template-columns:150px 1fr 1fr 1fr}
+.compareRow>div:first-child,.selfrow>div:first-child,.triStat>div:first-child{min-width:0;white-space:nowrap}
+.compareRow>div:first-child>.dot,.selfrow>div:first-child>.dot,.triStat>div:first-child>.dot{margin-right:7px!important;vertical-align:middle}
+.compareRow>div:first-child>.athleteLabel,.selfrow>div:first-child>.athleteLabel,.triStat>div:first-child>.athleteLabel{display:inline-block;vertical-align:middle}
+.selfrow{grid-template-columns:150px repeat(3,1fr)}
+.triStat{grid-template-columns:150px repeat(3,1fr)}
+@media(max-width:900px){.heat{grid-template-columns:132px repeat(4,minmax(75px,1fr));min-width:470px}.dayrestRow{grid-template-columns:116px repeat(var(--days),minmax(104px,1fr));gap:4px}}
+
+
+
+@media(max-width:520px){.periodCtl{grid-column:span 1}.dayRangeTop span{display:none}.rangeTick{font-size:9px}.selfrow,.eventDetail,.triStat{grid-template-columns:1fr 1fr}.selfrow>div:first-child,.eventDetail>div:first-child,.triStat>div:first-child{grid-column:span 2}.selfhead{display:none}.toolbar{grid-template-columns:1fr}.compareRow{grid-template-columns:1fr 1fr;gap:8px}.compareHead{display:none}.compareRow>div:first-child{grid-column:span 2}.eventItem span{font-size:12px}.toolbar .athletes{grid-column:span 1}.kpi .v{font-size:22px}.chip{padding:7px 9px}.chart{height:260px}.card{padding:14px}.hero h1{font-size:39px}.axis{font-size:11.5px;font-weight:600}.heat{grid-template-columns:106px repeat(4,minmax(76px,1fr));gap:4px;min-width:426px}.heatAth{white-space:nowrap;overflow:visible;font-size:12px!important;padding-left:0!important;padding-right:2px!important}.heatAth .dot{display:none!important}.dayrestRow{grid-template-columns:116px repeat(var(--days),minmax(104px,1fr));gap:4px}.dayrestAth b{white-space:nowrap;font-size:12.5px}.dayrestAth .dot{display:none!important}.compareRow .dot,.selfrow .dot,.eventDetail .dot,.triStat .dot{display:none!important}.athleteLabel,.dayrestCell .athleteLabel{display:inline-block!important;position:relative;white-space:nowrap;padding-bottom:3px;line-height:1.15;width:auto!important;max-width:100%}.athleteLabel:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:999px;background:var(--athlete-color);opacity:.72}.best6Range{display:inline-block;margin-left:7px;white-space:nowrap}.tlname{overflow:visible;text-overflow:clip}.tlname .athleteLabel{font-size:12.5px}}
 </style></head><body><div class="wrap">
-<div class="hero"><div><div class="eyebrow">240 часов · текущий срез</div><h1>Гонка изнутри</h1><p>Пять лидеров десятисуточной гонки. Сравнение дистанции, ходового темпа, отдыха и того, как меняется гонка в разное время суток.</p></div><div class="stamp"><div id="stamp"></div><div id="updatedStamp" style="margin-top:4px"></div></div></div>
+<div class="hero"><div><div class="eyebrow">240 часов · текущий срез · <span id="dataUpdatedAt" style="font-weight:500;letter-spacing:.04em;text-transform:none">—</span></div><h1>Гонка изнутри</h1><p>Пять лидеров десятисуточной гонки. Сравнение дистанции, ходового темпа, отдыха и того, как меняется гонка в разное время суток.</p></div><div class="stamp"><div id="stamp"></div></div></div>
 <div class="toolbar">
  <div class="ctl athletes"><label>Спортсмены</label><div class="chips" id="athleteChips"></div></div>
  <div class="ctl"><label>Показатель темпа</label><div class="seg"><button id="paceMove" class="on">движение</button><button id="paceGross">с паузами</button></div></div>
@@ -97,7 +118,19 @@ $('#paceMove').onclick=()=>{state.gross=false;$('#paceMove').classList.add('on')
  initPaceDailySplit();
 render();
 }
-function render(){renderLegend();renderKpis();renderDistance();renderPace();renderDaily();renderTimeline();renderDayRest();renderHeat();renderRestHeat();renderResultCompare();renderSelfCompare();renderAfterRest();renderBest6();renderInsights();let label=state.startDay===state.endDay?`сутки ${state.startDay}`:`сутки ${state.startDay}–${state.endDay}`;$('#stamp').textContent=`${label} · ${selected().length} из ${names.length} спортсменов`;let u=$('#updatedStamp');if(u){u.textContent=DATA_UPDATED_AT?`Данные обновлены: ${new Date(DATA_UPDATED_AT).toLocaleString('ru-RU')}`:'Данные из встроенного снимка'}}
+function formatUpdatedAt(v){
+ if(!v)return '—';
+ const d=new Date(v);
+ if(Number.isNaN(d.getTime()))return String(v);
+ const time=d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+ const date=d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'});
+ return `${time} ${date}`;
+}
+function renderUpdatedAt(){
+ const el=$('#dataUpdatedAt');
+ if(el)el.textContent=formatUpdatedAt(DATA_UPDATED_AT);
+}
+function render(){renderUpdatedAt();renderLegend();renderKpis();renderInsights();renderDistance();renderPace();renderDaily();renderTimeline();renderDayRest();renderHeat();renderRestHeat();renderResultCompare();renderSelfCompare();renderAfterRest();renderBest6();let label=state.startDay===state.endDay?`сутки ${state.startDay}`:`сутки ${state.startDay}–${state.endDay}`;$('#stamp').textContent=`${label} · ${selected().length} из ${names.length} спортсменов`}
 function renderLegend(){ $('#legend').innerHTML=selected().map(n=>`<span class="leg"><i class="dot" style="background:${DATA[n].color}"></i>${n}</span>`).join('') }
 function renderKpis(){let ss=selected().map(summary).filter(Boolean);let leader=[...ss].sort((a,b)=>b.total-a.total)[0];let bestMove=[...ss].sort((a,b)=>a.moveP-b.moveP)[0];let mostWork=[...ss].sort((a,b)=>b.move-a.move)[0];let stable=ss.map(x=>{let a=laps(x.n),q=Math.max(5,Math.floor(a.length/3)),p1=median(a.slice(0,q).map(z=>z.move)),p3=median(a.slice(-q).map(z=>z.move));return {...x,change:p1?((p3/p1)-1):Infinity}}).sort((a,b)=>a.change-b.change)[0];let arr=[['Больше километров',leader?leader.n.split(' ')[1]:'—',leader?leader.total+' км':''],['Быстрее бежит',bestMove?bestMove.n.split(' ')[1]:'—',bestMove?secToPace(bestMove.moveP)+'/км':''],['Лучше держит темп',stable?stable.n.split(' ')[1]:'—',stable&&Number.isFinite(stable.change)?`${stable.change>=0?'+':''}${Math.round(stable.change*100)}%`:''],['Больше времени в движении',mostWork?mostWork.n.split(' ')[1]:'—',mostWork?hms(mostWork.move):''],['Выбранный период',Math.round(periodHours())+' ч',state.startDay===state.endDay?`сутки ${state.startDay}`:`сутки ${state.startDay}–${state.endDay}`]];$('#kpis').innerHTML=arr.map(x=>`<div class="kpi"><div class="l">${x[0]}</div><div class="v">${x[1]}</div><div class="d">${x[2]}</div></div>`).join('')}
 function chartBase(el,xTicks,yTicks,xLabel,yLabel){let rw=Math.max(260,el.clientWidth||600),rh=Math.max(240,el.clientHeight||320),H=360,scale=H/rh,W=rw*scale,mobile=window.innerWidth<=520,axisPx=mobile?12:10.5,axisSize=axisPx*scale,m={l:(mobile?46:48)*scale,r:(mobile?10:14)*scale,t:14*scale,b:(mobile?36:34)*scale},iw=W-m.l-m.r,ih=H-m.t-m.b;let svg=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">`;for(let y of yTicks){let py=m.t+ih*(1-y.f);svg+=`<line class="gridline" x1="${m.l}" x2="${W-m.r}" y1="${py}" y2="${py}"/><text class="axis" style="font-size:${axisSize}px;font-weight:${mobile?600:500}" x="${m.l-8*scale}" y="${py+3.5*scale}" text-anchor="end">${y.t}</text>`}for(let x of xTicks){let px=m.l+iw*x.f;svg+=`<text class="axis" style="font-size:${axisSize}px;font-weight:${mobile?600:500}" x="${px}" y="${H-12*scale}" text-anchor="middle">${x.t}</text>`}return {W,H,m,iw,ih,svg}}
@@ -127,244 +160,32 @@ function renderAfterRest(){let rows=[];for(let n of selected()){let all=DATA[n].
 function sixHourWindows(n){let a=laps(n);if(!a.length)return[];let out=[],j=0;for(let i=0;i<a.length;i++){while(j<i&&a[i].elapsed-a[j].elapsed>21600)j++;let start=Math.max(periodStart(),a[i].elapsed-21600),km=a.filter(x=>x.elapsed>start&&x.elapsed<=a[i].elapsed).length;if(a[i].elapsed-start>=5.5*3600)out.push({km,start,end:a[i].elapsed})}return out}
 function renderBest6(){let rows=[];for(let n of selected()){let w=sixHourWindows(n);if(!w.length)continue;let ks=w.map(x=>x.km).sort((a,b)=>a-b),best=Math.max(...ks),worst=Math.min(...ks),typ=median(ks),bestW=w.find(x=>x.km===best),worstW=w.find(x=>x.km===worst);rows.push({n,best,typ,worst,bestW,worstW})}rows.sort((a,b)=>b.best-a.best);$('#best6').innerHTML=rows.length?`<div class="triStat selfhead"><div></div><div>Лучшие 6 ч</div><div>Типичные 6 ч</div><div>Худшие 6 ч</div></div>`+rows.map(x=>`<div class="triStat"><div><span class="dot" style="background:${DATA[x.n].color};display:inline-block;margin-right:7px"></span><b class="athleteLabel" style="--athlete-color:${DATA[x.n].color}">${x.n.split(' ')[1]}</b></div><div><span class="triMetricLabel">Лучшие 6 ч</span><b>${x.best} км</b><span class="triMeta">${fmt(x.bestW.start/3600)}–${fmt(x.bestW.end/3600)} ч гонки</span></div><div><span class="triMetricLabel">Типичные 6 ч</span><b>${fmt(x.typ)} км</b><span class="triExplain">медиана всех 6-часовых отрезков</span></div><div><span class="triMetricLabel">Худшие 6 ч</span><b>${x.worst} км</b><span class="triMeta">${fmt(x.worstW.start/3600)}–${fmt(x.worstW.end/3600)} ч гонки</span></div></div>`).join(''):'<div class="empty">Период короче полного шестичасового окна</div>'}
 function renderInsights(){
-  const ss = selected().map(summary).filter(Boolean);
-  const pool = [];
-  if (!ss.length) {
-    $('#insights').innerHTML = '';
-    return;
+  const ss=selected().map(summary).filter(Boolean);
+  const el=$('#insights');
+  if(!ss.length){el.innerHTML='<div class="empty">Выбери хотя бы одного спортсмена</div>';return}
+  const surname=n=>n.split(' ')[1];
+  const items=[];
+  const byKm=[...ss].sort((a,b)=>b.total-a.total);
+  const leader=byKm[0],second=byKm[1];
+  if(leader&&second){
+    const gap=leader.total-second.total;
+    items.push([`${surname(leader.n)} впереди на ${fmt(gap)} км`,`Отрыв от ${surname(second.n)} – ближайшего преследователя – сформирован и скоростью, и объёмом: ${leader.total} км против ${second.total} км.`]);
+  }else if(leader){
+    items.push([`${surname(leader.n)} лидирует по дистанции`,`${leader.total} км внутри выбранного периода.`]);
   }
-
-  const add = (score, title, text, key = title) => {
-    if (!pool.some(x => x.key === key)) pool.push({score, title, text, key});
-  };
-  const surname = n => n.split(' ')[1];
-  const pct = x => `${x >= 0 ? '+' : ''}${Math.round(x)}%`;
-  const labs = ['12–18','18–24','00–06','06–12'];
-
-  // 1. Больше километров при меньшем времени в движении.
-  if (ss.length > 1) {
-    let best = null;
-    for (const a of ss) {
-      for (const b of ss) {
-        if (a.n === b.n) continue;
-        const kmGap = a.total - b.total;
-        const moveGap = (a.move - b.move) / 3600;
-        if (kmGap >= 15 && moveGap <= -2) {
-          const score = kmGap + Math.abs(moveGap) * 4;
-          if (!best || score > best.score) best = {a,b,kmGap,moveGap,score};
-        }
-      }
-    }
-    if (best) {
-      add(92,
-        `${surname(best.a.n)} набрал больше, хотя двигался меньше`,
-        `${fmt(best.kmGap)} км преимущества при ${fmt(Math.abs(best.moveGap))} ч меньшего времени в движении. Ходовой темп: ${secToPace(best.a.moveP)}/км против ${secToPace(best.b.moveP)}/км у ${surname(best.b.n)}.`,
-        'speed-vs-work');
-    }
+  const mostWork=[...ss].sort((a,b)=>b.move-a.move)[0];
+  if(mostWork){
+    const rank=byKm.findIndex(x=>x.n===mostWork.n)+1;
+    items.push([`${surname(mostWork.n)} больше всех времени в движении`,`${hms(mostWork.move)} в движении при ходовом темпе ${secToPace(mostWork.moveP)}/км${rank>0?` – сейчас это ${rank}-е место по дистанции.`:'.'}`]);
   }
-
-  // 2. Лидер и структура разрыва.
-  if (ss.length > 1) {
-    const lead = [...ss].sort((a,b) => b.total - a.total);
-    const a = lead[0], b = lead[1];
-    const gap = a.total - b.total;
-    if (gap >= 10) {
-      const moveGap = (a.move - b.move) / 3600;
-      const paceGap = a.moveP - b.moveP;
-      add(74,
-        `${surname(a.n)} впереди на ${fmt(gap)} км`,
-        `В движении он провёл на ${fmt(Math.abs(moveGap))} ч ${moveGap >= 0 ? 'больше' : 'меньше'}, а типичный километр ${Math.abs(Math.round(paceGap))} с/км ${paceGap <= 0 ? 'быстрее' : 'медленнее'} ${surname(b.n)}.`,
-        'leader-gap');
-    }
+  const stable=ss.map(x=>{let a=laps(x.n),q=Math.max(5,Math.floor(a.length/3)),p1=median(a.slice(0,q).map(z=>z.move)),p3=median(a.slice(-q).map(z=>z.move));return {...x,change:p1?((p3/p1)-1):Infinity}}).filter(x=>Number.isFinite(x.change)).sort((a,b)=>a.change-b.change)[0];
+  if(stable){
+    items.push([`${surname(stable.n)} лучше всех держит темп`,`Отклонение от первых суток ${stable.change>=0?'+':''}${Math.round(stable.change*100)}% – это лучший показатель среди выбранных спортсменов.`]);
   }
-
-  // 3. Зависимость километража от времени суток.
-  const exposure = [0,1,2,3].map(blockExposureHours);
-  const todRows = ss.map(x => {
-    const vals = [0,0,0,0];
-    laps(x.n).forEach(z => vals[blockIndex(z.hour)]++);
-    const norm = vals.map((v,i) => exposure[i] > 0 ? v / exposure[i] * 6 : 0);
-    const positive = norm.filter(v => v > 0);
-    const mx = Math.max(...norm);
-    const mn = positive.length ? Math.min(...positive) : 0;
-    return {n:x.n, vals:norm, mx, mn, ratio:mn ? mx/mn : 1, imax:norm.indexOf(mx), imin:norm.indexOf(mn)};
-  }).sort((a,b) => b.ratio - a.ratio);
-  if (todRows[0] && todRows[0].ratio >= 1.22) {
-    const r = todRows[0];
-    add(80 + Math.min(15,(r.ratio-1)*20),
-      `${surname(r.n)} сильнее остальных зависит от времени суток`,
-      `${labs[r.imax]}: ${fmt(r.mx)} км за типичный 6-часовой блок; ${labs[r.imin]}: ${fmt(r.mn)} км.`,
-      'tod-km');
-  }
-
-  // 4. Зависимость отдыха от времени суток.
-  const restTod = ss.map(x => {
-    const vals = restOverlapByBlock(x.n).map((v,i) => exposure[i] > 0 ? v / exposure[i] * 6 : 0);
-    const mx = Math.max(...vals), mn = Math.min(...vals);
-    return {n:x.n, vals, mx, mn, spread:mx-mn, imax:vals.indexOf(mx), imin:vals.indexOf(mn)};
-  }).sort((a,b) => b.spread - a.spread)[0];
-  if (restTod && restTod.spread >= 0.5) {
-    add(76,
-      `${surname(restTod.n)} явно выбирает своё время для отдыха`,
-      `${labs[restTod.imax]}: ${fmt(restTod.mx)} ч отдыха на 6 ч времени; ${labs[restTod.imin]}: ${fmt(restTod.mn)} ч.`,
-      'tod-rest');
-  }
-
-  // 5. Возвращение после длинных пауз.
-  const rebound = [];
-  for (const x of ss) {
-    const ds = [];
-    const events = restEpisodesAll(x.n).filter(e => e.dur >= 1800 && e.end > periodStart() && e.start < periodEnd());
-    for (const e of events) {
-      const all = DATA[x.n].laps;
-      const i0 = Math.max(0,e.firstLap-1), i1 = Math.max(i0,e.lastLap-1);
-      const before = all.slice(Math.max(0,i0-10),i0).map(z=>z.move).filter(z=>z>0&&z<1000);
-      const after = all.slice(i1+1,i1+11).map(z=>z.move).filter(z=>z>0&&z<1000);
-      if (before.length >= 4 && after.length >= 4) ds.push(median(after)/median(before)-1);
-    }
-    if (ds.length) rebound.push({n:x.n,p:median(ds),count:ds.length});
-  }
-  rebound.sort((a,b)=>a.p-b.p);
-  if (rebound[0] && rebound[0].p <= -0.04) {
-    const r = rebound[0];
-    add(86,
-      `${surname(r.n)} заметно оживает после длинных пауз`,
-      `После отдыха ≥30 мин ближайший ходовой темп в медиане становится быстрее примерно на ${Math.abs(Math.round(r.p*100))}%.`,
-      'rebound');
-  }
-  const worstRebound = [...rebound].sort((a,b)=>b.p-a.p)[0];
-  if (worstRebound && worstRebound.p >= 0.08) {
-    add(63,
-      `${surname(worstRebound.n)} после длинных пауз возвращается тяжело`,
-      `Ближайший ходовой темп после отдыха ≥30 мин в медиане хуже примерно на ${Math.round(worstRebound.p*100)}%.`,
-      'post-rest-slow');
-  }
-
-  // 6–9. Сравнение с первыми сутками.
-  if (state.endDay > 1) {
-    const rows = ss.map(x => {
-      const cur = dayStats(x.n,state.endDay);
-      if (!cur) return null;
-      const b = firstDayComparable(x.n,cur.elapsed);
-      if (!b) return null;
-      return {
-        n:x.n,
-        pace:(cur.moveP/b.moveP-1)*100,
-        km:(cur.km/b.km-1)*100,
-        move:(cur.move/b.move-1)*100
-      };
-    }).filter(Boolean);
-
-    const slow = [...rows].sort((a,b)=>b.pace-a.pace)[0];
-    if (slow && slow.pace >= 8) add(82,`${surname(slow.n)} сильнее всего потерял ходовой темп`,`На ${state.endDay}-е сутки типичный километр медленнее первых суток примерно на ${Math.round(slow.pace)}%.`,'pace-loss');
-
-    const stable = [...rows].sort((a,b)=>Math.abs(a.pace)-Math.abs(b.pace))[0];
-    if (stable && Math.abs(stable.pace) <= 6) add(68,`${surname(stable.n)} удивительно хорошо держит ходовой темп`,`На ${state.endDay}-е сутки отклонение от первых суток всего ${Math.abs(Math.round(stable.pace))}%.`,'pace-stable');
-
-    const kmDrop = [...rows].sort((a,b)=>a.km-b.km)[0];
-    if (kmDrop && kmDrop.km <= -20) add(73,`${surname(kmDrop.n)} сильнее всего просел по суточному километражу`,`На ${state.endDay}-е сутки результат ниже сопоставимого отрезка первых суток примерно на ${Math.abs(Math.round(kmDrop.km))}%.`,'km-drop');
-
-    const workDrop = [...rows].sort((a,b)=>a.move-b.move)[0];
-    if (workDrop && workDrop.move <= -15) add(66,`${surname(workDrop.n)} заметно сократил рабочее время`,`На ${state.endDay}-е сутки времени в движении примерно на ${Math.abs(Math.round(workDrop.move))}% меньше, чем на сопоставимом отрезке первых суток.`,'work-drop');
-  }
-
-  // 10. Камбэк по суточному километражу.
-  if (state.endDay >= 3) {
-    const comeback = [];
-    for (const x of ss) {
-      for (let d=Math.max(2,state.startDay); d<=state.endDay; d++) {
-        const prev = dayStats(x.n,d-1), cur = dayStats(x.n,d);
-        if (prev && cur && cur.elapsed >= 0.75*prev.elapsed) {
-          const gain = cur.km - prev.km;
-          if (gain >= 8) comeback.push({n:x.n,d,gain,prev,cur});
-        }
-      }
-    }
-    comeback.sort((a,b)=>b.gain-a.gain);
-    if (comeback[0]) {
-      const r = comeback[0];
-      add(79,`${surname(r.n)} сумел прибавить после предыдущих суток`,`Сутки ${r.d}: ${r.cur.km} км против ${r.prev.km} км сутками раньше – плюс ${r.gain} км.`,'daily-comeback');
-    }
-  }
-
-  // 11–12. Текущий импульс последних суток.
-  if (state.endDay >= 2) {
-    const momentum = [];
-    for (const x of ss) {
-      const prev = dayStats(x.n,state.endDay-1), cur = dayStats(x.n,state.endDay);
-      if (prev && cur && cur.elapsed >= 0.65*prev.elapsed) {
-        momentum.push({n:x.n,km:(cur.km/prev.km-1)*100,pace:(cur.moveP/prev.moveP-1)*100});
-      }
-    }
-    const up = [...momentum].sort((a,b)=>b.km-a.km)[0];
-    if (up && up.km >= 10) add(77,`${surname(up.n)} набирает ход на последних сутках`,`Километраж текущих суток выше предыдущих примерно на ${Math.round(up.km)}%; ходовой темп изменился на ${pct(up.pace)}.`,'momentum-up');
-
-    const down = [...momentum].sort((a,b)=>a.km-b.km)[0];
-    if (down && down.km <= -15) add(69,`${surname(down.n)} заметно просел на последних сутках`,`Километраж ниже предыдущих суток примерно на ${Math.abs(Math.round(down.km))}%.`,'momentum-down');
-  }
-
-  // 13. Самый длинный отдых.
-  let longest = null;
-  for (const x of ss) {
-    const eps = restEpisodesAll(x.n).filter(e => e.dur >= 600 && e.end > periodStart() && e.start < periodEnd());
-    for (const e of eps) if (!longest || e.dur > longest.e.dur) longest = {n:x.n,e};
-  }
-  if (longest && longest.e.dur >= 3600) add(67,`${surname(longest.n)} взял самый длинный отдых`,`Оценочный отдых ${hms(longest.e.dur)} примерно на ${fmt(longest.e.end/3600)}-м часу гонки.`,'longest-rest');
-
-  // 14–15. Стиль отдыха: концентрированный или дробный.
-  const sleepStyle = [];
-  for (const x of ss) {
-    const eps = meaningfulRestEpisodes(x.n).filter(e => e.end > periodStart() && e.start < periodEnd());
-    const rest = totalRestInRange(x.n,periodStart(),periodEnd());
-    if (rest >= 3600 && eps.length) {
-      const longestDur = Math.max(...eps.map(e=>e.dur));
-      sleepStyle.push({n:x.n,count:eps.length,share:longestDur/rest,rest});
-    }
-  }
-  const concentrated = [...sleepStyle].sort((a,b)=>b.share-a.share)[0];
-  if (concentrated && concentrated.share >= 0.45) add(64,`${surname(concentrated.n)} концентрирует отдых в крупных эпизодах`,`Самый длинный эпизод даёт около ${Math.round(concentrated.share*100)}% всего оценочного отдыха за выбранный период.`,'rest-concentrated');
-
-  const fragmented = [...sleepStyle].filter(x=>x.count>=4).sort((a,b)=>a.share-b.share)[0];
-  if (fragmented && fragmented.share <= 0.35) add(62,`${surname(fragmented.n)} отдыхает дробнее остальных`,`За выбранный период ${fragmented.count} содержательных эпизодов; самый длинный даёт лишь около ${Math.round(fragmented.share*100)}% всего отдыха.`,'rest-fragmented');
-
-  // 16–17. Ровность шестичасовых окон.
-  const six = [];
-  for (const x of ss) {
-    const w = sixHourWindows(x.n);
-    if (w.length >= 5) {
-      const ks = w.map(q=>q.km);
-      const best = Math.max(...ks), worst = Math.min(...ks), med = median(ks);
-      six.push({n:x.n,best,worst,med,spread:(best-worst)/Math.max(1,med)});
-    }
-  }
-  const volatile = [...six].sort((a,b)=>b.spread-a.spread)[0];
-  if (volatile && volatile.spread >= 0.45) add(72,`${surname(volatile.n)} бежит очень неровно`,`Лучшие 6 часов – ${volatile.best} км, худшие – ${volatile.worst} км. Разброс относительно типичного окна около ${Math.round(volatile.spread*100)}%.`,'six-volatile');
-
-  const steady = [...six].sort((a,b)=>a.spread-b.spread)[0];
-  if (steady && steady.spread <= 0.30) add(61,`${surname(steady.n)} наиболее ровный на шестичасовых отрезках`,`Лучшие 6 часов – ${steady.best} км, худшие – ${steady.worst} км: разброс заметно меньше, чем у остальных.`,'six-steady');
-
-  // 18. Доля времени в движении.
-  const duty = ss.map(x=>({n:x.n,share:x.move/x.elapsed})).sort((a,b)=>b.share-a.share);
-  if (duty.length > 1 && duty[0].share - duty.at(-1).share >= 0.08) add(65,`${surname(duty[0].n)} проводит в движении заметно большую долю времени`,`Около ${Math.round(duty[0].share*100)}% выбранного периода против ${Math.round(duty.at(-1).share*100)}% у ${surname(duty.at(-1).n)}.`,'duty-cycle');
-
-  // Финальный сюжет Заборского против рекорда Куроса на 240 часах.
-  const KOUROS_240H_KM = 1551.407616;
-  const z = 'Иван Заборский';
-  const finished = MAX_H >= 239;
-  if (finished && DATA[z] && selected().includes(z)) {
-    const total = DATA[z].laps.length + 0.005;
-    const diff = total - KOUROS_240H_KM;
-    if (diff > 0) {
-      add(1000,'Заборский обогнал Куроса',`Финальный результат – ${fmt(total)} км за 240 часов. Это примерно на ${fmt(diff)} км больше отметки Янниса Куроса 1551,4 км.`,'kouros-final');
-    } else if (Math.abs(diff) < 0.5) {
-      add(1000,'До Куроса не хватило совсем чуть-чуть',`Финальный результат – ${fmt(total)} км. До 1551,4 км Куроса не хватило около ${fmt(Math.abs(diff))} км.`,'kouros-final');
-    } else {
-      add(1000,`До Куроса не хватило ${fmt(Math.abs(diff))} км`,`Заборский завершил 240 часов с результатом ${fmt(total)} км против 1551,4 км у Янниса Куроса.`,'kouros-final');
-    }
-  }
-
-  pool.sort((a,b)=>b.score-a.score);
-  $('#insights').innerHTML = pool.slice(0,6).map(x=>`<div class="insight"><b>${x.title}</b><span>${x.text}</span></div>`).join('');
+  const ph=Math.round(periodHours());
+  const label=state.startDay===state.endDay?`сутки ${state.startDay}`:`сутки ${state.startDay}–${state.endDay}`;
+  items.push([`Выбранный период – ${ph} часов`,`На экране суммарно показаны ${label}. Наблюдения и метрики пересчитаны только по этому диапазону.`]);
+  el.innerHTML=items.slice(0,6).map(x=>`<div class="insight"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
 }
 async function loadFreshData(first=false){
  try{
