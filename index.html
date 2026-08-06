@@ -188,6 +188,49 @@
   }
 }
 
+
+@media(min-width:901px){
+  .controlPanel{
+    position:sticky;
+    top:8px;
+    z-index:20;
+  }
+}
+
+
+/* v26 – full-width sticky control strip */
+@media(min-width:901px){
+  .controlPanel{
+    width:100%;
+    max-width:none;
+    position:sticky;
+    top:0;
+    z-index:30;
+    grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr);
+    align-items:start;
+    column-gap:28px;
+    padding:14px 18px 13px;
+    margin:14px 0 18px;
+    border-radius:0;
+    border-left:0;
+    border-right:0;
+    border-top:1px solid rgba(221,225,231,.9);
+    border-bottom:1px solid rgba(211,216,224,.95);
+    background:rgba(248,249,251,.94);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 6px 18px rgba(20,24,32,.05);
+  }
+  .controlPanel .periodCtl{
+    max-width:430px;
+    justify-self:end;
+  }
+  .controlMeta{
+    top:10px;
+    right:18px;
+  }
+}
+
 </style></head><body><div class="wrap">
 <div class="hero"><div><div class="eyebrow">240 часов · текущий срез · <span id="dataUpdatedAt" style="font-weight:500;letter-spacing:.04em;text-transform:none">—</span></div><h1>Гонка изнутри</h1><p>Пять лидеров десятисуточной гонки. Сравнение дистанции, ходового темпа, отдыха и того, как меняется гонка в разное время суток.</p></div></div>
 <div class="toolbar controlPanel"><div class="controlMeta" id="stamp"></div>
