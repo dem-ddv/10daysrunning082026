@@ -55,25 +55,54 @@
 }
 
 
-/* v21 – desktop filter composition, local pace control, and cleaned responsive layout */
+/* v23 – compact desktop control panel + local pace control */
 @media(min-width:901px){
-  .toolbar{
-    grid-template-columns:minmax(0,1fr) minmax(380px,500px);
-    justify-content:space-between;
-    align-items:end;
+  .controlPanel{
+    width:min(980px,72vw);
+    grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr);
+    justify-content:start;
+    align-items:start;
     column-gap:28px;
-    padding:13px 16px;
+    row-gap:0;
+    padding:14px 16px 13px;
+    margin:14px 0 18px;
+    border-color:#dde1e7;
+    background:rgba(250,251,252,.96);
+    box-shadow:0 8px 24px rgba(20,24,32,.045);
   }
-  .toolbar .athletes{min-width:0}
-  .toolbar .periodCtl{
+  .controlPanel .ctl{
+    align-self:start;
+    min-width:0;
+  }
+  .controlPanel .ctl label{
+    margin:0 0 8px;
+  }
+  .controlPanel .athletes{min-width:0}
+  .controlPanel .chips{
+    gap:6px;
+    flex-wrap:nowrap;
+  }
+  .controlPanel .chip{
+    padding:7px 10px;
+    font-size:11.5px;
+  }
+  .controlPanel .periodCtl{
     grid-column:auto;
     min-width:0;
     width:100%;
-    max-width:500px;
-    justify-self:end;
+    max-width:410px;
+    justify-self:start;
   }
-  .toolbar .dayRange{min-width:0}
-  .toolbar .dayRangeTop{margin-bottom:4px}
+  .controlPanel .dayRange{
+    min-width:0;
+    padding-top:0;
+  }
+  .controlPanel .dayRangeTop{
+    margin-bottom:4px;
+    align-items:flex-start;
+  }
+  .controlPanel .dayRangeTop b{font-size:12px}
+  .controlPanel .dayRangeTop span{font-size:11px}
 
   .paceHead{
     display:flex;
@@ -84,10 +113,7 @@
   }
   .paceHeadText{min-width:0;flex:1 1 auto}
   .paceHeadText .sub{margin-bottom:8px}
-  .paceMode{
-    flex:0 0 230px;
-    margin-top:1px;
-  }
+  .paceMode{flex:0 0 230px;margin-top:1px}
   .paceModeLabel{
     display:block;
     font-size:10px;
@@ -110,10 +136,7 @@
     min-width:0;
     padding:15px 0;
   }
-  #best6 .triStat>div{
-    min-width:0;
-    justify-self:stretch;
-  }
+  #best6 .triStat>div{min-width:0;justify-self:stretch}
   #best6 .triStat>div:first-child{
     grid-column:auto!important;
     margin-bottom:0!important;
@@ -142,9 +165,32 @@
   .paceMode .seg{width:100%}
 }
 
+@media(min-width:901px){
+  .controlPanel{
+    position:relative;
+    padding-top:34px;
+  }
+  .controlMeta{
+    position:absolute;
+    top:12px;
+    right:16px;
+    font-size:11px;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+}
+@media(max-width:900px){
+  .controlMeta{
+    grid-column:1/-1;
+    font-size:11px;
+    color:var(--muted);
+    margin:0 0 2px;
+  }
+}
+
 </style></head><body><div class="wrap">
-<div class="hero"><div><div class="eyebrow">240 часов · текущий срез · <span id="dataUpdatedAt" style="font-weight:500;letter-spacing:.04em;text-transform:none">—</span></div><h1>Гонка изнутри</h1><p>Пять лидеров десятисуточной гонки. Сравнение дистанции, ходового темпа, отдыха и того, как меняется гонка в разное время суток.</p></div><div class="stamp"><div id="stamp"></div></div></div>
-<div class="toolbar">
+<div class="hero"><div><div class="eyebrow">240 часов · текущий срез · <span id="dataUpdatedAt" style="font-weight:500;letter-spacing:.04em;text-transform:none">—</span></div><h1>Гонка изнутри</h1><p>Пять лидеров десятисуточной гонки. Сравнение дистанции, ходового темпа, отдыха и того, как меняется гонка в разное время суток.</p></div></div>
+<div class="toolbar controlPanel"><div class="controlMeta" id="stamp"></div>
  <div class="ctl athletes"><label>Спортсмены</label><div class="chips" id="athleteChips"></div></div>
  
  <div class="ctl periodCtl"><label>Период</label><div class="dayRange"><div class="dayRangeTop"><b id="rangeLabel">сутки 1–5</b><span>от начала левой до конца правой</span></div><div class="rangeShell"><div class="rangeRail"></div><div class="rangeFill" id="rangeFill"></div><input class="daySlider" id="dayFromRange" type="range" min="0" max="5" step="1" value="0" aria-label="Начало периода"><input class="daySlider" id="dayToRange" type="range" min="0" max="5" step="1" value="5" aria-label="Конечные сутки"></div><div class="rangeTicks" id="rangeTicks"></div></div></div>
