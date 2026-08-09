@@ -360,29 +360,204 @@ function renderInsights(){
   const ss=selected().map(summary).filter(Boolean);
   const el=$('#insights');
   if(!ss.length){el.innerHTML='<div class="empty">Выбери хотя бы одного спортсмена</div>';return}
+
   const surname=n=>n.split(' ')[1];
-  const items=[];
+  const candidates=[];
+  const add=(score,title,text,tag)=>{if(title&&text)candidates.push({score,title,text,tag})};
   const byKm=[...ss].sort((a,b)=>b.total-a.total);
   const leader=byKm[0],second=byKm[1];
+  const PACE_SIG=5;          // сек/км: меньше – уже похоже на шум
+  const REST_SIG=30*60;      // 30 минут на выбранном периоде
+  const KM_SIG=3;            // 3 км – минимально заметный сдвиг
+
+  // 1. Лидер и реальный механизм преимущества над ближайшим преследователем.
   if(leader&&second){
     const gap=leader.total-second.total;
-    items.push([`${surname(leader.n)} впереди на ${fmt(gap)} км`,`Отрыв от ${surname(second.n)} – ближайшего преследователя – сформирован и скоростью, и объёмом: ${leader.total} км против ${second.total} км.`]);
+    const paceAdv=second.moveP-leader.moveP;   // >0: лидер быстрее
+    const restAdv=second.rest-leader.rest;     // >0: лидер меньше отдыхает
+    const paceMat=Math.abs(paceAdv)>=PACE_SIG;
+    const restMat=Math.abs(restAdv)>=REST_SIG;
+
+    if(paceMat&&restMat&&paceAdv>0&&restAdv>0){
+      add(100,`${surname(leader.n)} впереди на ${fmt(gap)} км`,
+        `Он и бежит быстрее ${surname(second.n)} на ${Math.round(paceAdv)} сек/км, и отдыхает меньше на ${hms(restAdv)} – преимущество складывается сразу из двух факторов.`,'leader');
+    }else if(paceMat&&restMat&&paceAdv>0&&restAdv<0){
+      add(98,`${surname(leader.n)} берёт скоростью`,
+        `Он быстрее ${surname(second.n)} на ${Math.round(paceAdv)} сек/км и сохраняет отрыв ${fmt(gap)} км, хотя отдыхает на ${hms(-restAdv)} больше.`,'leader');
+    }else if(paceMat&&restMat&&paceAdv<0&&restAdv>0){
+      add(98,`${surname(leader.n)} берёт временем на трассе`,
+        `${surname(second.n)} бежит быстрее на ${Math.round(-paceAdv)} сек/км, но ${surname(leader.n)} отдыхает на ${hms(restAdv)} меньше и остаётся впереди на ${fmt(gap)} км.`,'leader');
+    }else if(paceMat&&paceAdv>0){
+      add(94,`${surname(leader.n)} быстрее ближайшего преследователя`,
+        `Разница с ${surname(second.n)} – ${Math.round(paceAdv)} сек/км ходового темпа; текущий отрыв – ${fmt(gap)} км.`,'leader');
+    }else if(restMat&&restAdv>0){
+      add(94,`${surname(leader.n)} меньше стоит`,
+        `Он набрал на ${hms(restAdv)} меньше отдыха, чем ${surname(second.n)}; текущий отрыв – ${fmt(gap)} км.`,'leader');
+    }else{
+      add(82,`${surname(leader.n)} впереди на ${fmt(gap)} км`,
+        `По скорости и времени отдыха у лидера нет одного явно доминирующего преимущества над ${surname(second.n)} – отрыв складывается из небольших различий.`,'leader');
+    }
+
+    // 2. Что происходило с преимуществом во второй половине выбранного периода.
+    if(periodHours()>=24){
+      const mid=(periodStart()+periodEnd())/2;
+      const l1=rangeStats(leader.n,periodStart(),mid),l2=rangeStats(leader.n,mid,periodEnd());
+      const s1=rangeStats(second.n,periodStart(),mid),s2=rangeStats(second.n,mid,periodEnd());
+      if(l1&&l2&&s1&&s2){
+        const firstGain=l1.km-s1.km,secondGain=l2.km-s2.km;
+        if(secondGain>=KM_SIG&&secondGain-firstGain>=KM_SIG){
+          add(96,`${surname(leader.n)} наращивает отрыв`,
+            `Во второй половине периода он набрал на ${fmt(secondGain)} км больше ${surname(second.n)}${firstGain>0?` против ${fmt(firstGain)} км в первой половине`:''}.`,'trend');
+        }else if(secondGain<=-KM_SIG){
+          add(99,`${surname(second.n)} начал отыгрывать отставание`,
+            `Во второй половине периода он набрал на ${fmt(-secondGain)} км больше ${surname(leader.n)}. Общий лидер пока впереди, но разрыв сокращается.`,'trend');
+        }
+      }
+    }
   }else if(leader){
-    items.push([`${surname(leader.n)} лидирует по дистанции`,`${leader.total} км внутри выбранного периода.`]);
+    add(60,`${surname(leader.n)} – ${leader.total} км за период`,
+      `Ходовой темп ${secToPace(leader.moveP)}/км, оценочный отдых – ${hms(leader.rest)}.`,'single');
   }
-  const mostWork=[...ss].sort((a,b)=>b.move-a.move)[0];
-  if(mostWork){
-    const rank=byKm.findIndex(x=>x.n===mostWork.n)+1;
-    items.push([`${surname(mostWork.n)} больше всех времени в движении`,`${hms(mostWork.move)} в движении при ходовом темпе ${secToPace(mostWork.moveP)}/км${rank>0?` – сейчас это ${rank}-е место по дистанции.`:'.'}`]);
+
+  // 3. Противоречия: максимум работы / скорости / минимум отдыха не совпадает с лидером.
+  if(ss.length>1&&leader){
+    const mostWork=[...ss].sort((a,b)=>b.move-a.move)[0];
+    if(mostWork.n!==leader.n&&mostWork.move-leader.move>=REST_SIG){
+      const rank=byKm.findIndex(x=>x.n===mostWork.n)+1;
+      add(93,`${surname(mostWork.n)} дольше всех в движении – но не лидирует`,
+        `Он провёл на трассе на ${hms(mostWork.move-leader.move)} больше ${surname(leader.n)}, однако занимает ${rank}-е место. Значит, одного времени в работе здесь недостаточно.`,'paradox');
+    }
+
+    const fastest=[...ss].sort((a,b)=>a.moveP-b.moveP)[0];
+    if(fastest.n!==leader.n&&leader.moveP-fastest.moveP>=PACE_SIG){
+      const rank=byKm.findIndex(x=>x.n===fastest.n)+1;
+      const extraRest=fastest.rest-leader.rest;
+      let reason=extraRest>=REST_SIG?` При этом отдыха у него на ${hms(extraRest)} больше, чем у лидера.`:'';
+      add(95,`${surname(fastest.n)} бежит быстрее всех, но идёт ${rank}-м`,
+        `Его ходовой темп – ${secToPace(fastest.moveP)}/км, на ${Math.round(leader.moveP-fastest.moveP)} сек/км быстрее ${surname(leader.n)}.${reason}`,'paradox');
+    }
+
+    const leastRest=[...ss].sort((a,b)=>a.rest-b.rest)[0];
+    if(leastRest.n!==leader.n&&leader.rest-leastRest.rest>=REST_SIG){
+      const rank=byKm.findIndex(x=>x.n===leastRest.n)+1;
+      add(89,`${surname(leastRest.n)} отдыхает меньше всех – но идёт ${rank}-м`,
+        `Остановок на ${hms(leader.rest-leastRest.rest)} меньше, чем у ${surname(leader.n)}. Экономия на паузах сама по себе лидерства не даёт.`,'paradox');
+    }
   }
-  const stable=ss.map(x=>{let a=laps(x.n),q=Math.max(5,Math.floor(a.length/3)),p1=median(a.slice(0,q).map(z=>z.move)),p3=median(a.slice(-q).map(z=>z.move));return {...x,change:p1?((p3/p1)-1):Infinity}}).filter(x=>Number.isFinite(x.change)).sort((a,b)=>a.change-b.change)[0];
-  if(stable){
-    items.push([`${surname(stable.n)} лучше всех держит темп`,`Отклонение от первых суток ${stable.change>=0?'+':''}${Math.round(stable.change*100)}% – это лучший показатель среди выбранных спортсменов.`]);
+
+  // 4. Изменение темпа между первыми и последними ПОЛНЫМИ сутками выбранного периода.
+  const dailyChanges=[];
+  for(const x of ss){
+    const days=[];
+    for(let d=state.startDay;d<=state.endDay;d++){
+      const s=dayStats(x.n,d);
+      if(s&&s.elapsed>=23.5*3600&&isFinite(s.moveP))days.push({d,s});
+    }
+    if(days.length>=2){
+      const first=days[0],last=days.at(-1),change=(last.s.moveP/first.s.moveP-1)*100;
+      dailyChanges.push({n:x.n,first,last,change,days});
+
+      // Возврат скорости в последние полные сутки после предыдущих.
+      if(days.length>=3){
+        const prev=days.at(-2),rebound=(prev.s.moveP-last.s.moveP)/prev.s.moveP*100;
+        if(rebound>=3){
+          add(91,`${surname(x.n)} прибавил в последние сутки`,
+            `Ходовой темп улучшился с ${secToPace(prev.s.moveP)} до ${secToPace(last.s.moveP)}/км – примерно на ${Math.round(rebound)}% быстрее предыдущих суток.`,'rebound');
+        }
+      }
+    }
   }
-  const ph=Math.round(periodHours());
-  const label=state.startDay===state.endDay?`сутки ${state.startDay}`:`сутки ${state.startDay}–${state.endDay}`;
-  items.push([`Выбранный период – ${ph} часов`,`На экране суммарно показаны ${label}. Наблюдения и метрики пересчитаны только по этому диапазону.`]);
-  el.innerHTML=items.slice(0,6).map(x=>`<div class="insight"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+  if(dailyChanges.length){
+    const best=[...dailyChanges].sort((a,b)=>a.change-b.change)[0];
+    const worst=[...dailyChanges].sort((a,b)=>b.change-a.change)[0];
+    if(best.change<=-2){
+      add(92,`${surname(best.n)} к концу периода стал быстрее`,
+        `Последние полные сутки – ${secToPace(best.last.s.moveP)}/км против ${secToPace(best.first.s.moveP)}/км в первые: улучшение примерно на ${Math.round(-best.change)}%.`,'stability');
+    }else if(dailyChanges.length>1&&worst.change-best.change>=3){
+      add(90,`${surname(best.n)} меньше всех замедлился`,
+        `От первых полных суток к последним его ходовой темп изменился на ${best.change>=0?'+':''}${Math.round(best.change)}%. У остальных выбранных просадка заметнее.`,'stability');
+    }else if(best.change>=3){
+      add(83,`Темп просел у всех выбранных`,
+        `Лучше остальных держится ${surname(best.n)}: от первых полных суток к последним замедление около ${Math.round(best.change)}%.`,'stability');
+    }
+  }
+
+  // 5. Устойчивость по непрерывным 6-часовым окнам.
+  const consistency=[];
+  for(const x of ss){
+    const w=sixHourWindows(x.n);
+    if(w.length<12)continue;
+    const ks=w.map(z=>z.km);
+    const med=median(ks),lo=quantile(ks,.1),hi=quantile(ks,.9);
+    if(med>0)consistency.push({n:x.n,med,lo,hi,spread:(hi-lo)/med,w});
+
+    const best=Math.max(...ks),bestW=w.find(z=>z.km===best);
+    if(bestW&&bestW.end>=periodEnd()-12*3600&&best>=med*1.12){
+      add(88,`${surname(x.n)} выдал сильный отрезок уже под конец`,
+        `Лучшие 6 часов дали ${best} км против типичных ${fmt(med)} км, и это окно пришлось на последние 12 часов выбранного периода.`,'sixhour');
+    }
+  }
+  if(consistency.length>1){
+    const steady=[...consistency].sort((a,b)=>a.spread-b.spread)[0];
+    const wild=[...consistency].sort((a,b)=>b.spread-a.spread)[0];
+    if(wild.spread-steady.spread>=.12){
+      add(86,`${surname(steady.n)} ровнее всех набирает дистанцию`,
+        `У него разброс между сильными и слабыми 6-часовыми окнами меньше, чем у остальных выбранных – меньше провалов и всплесков.`,'sixhour');
+    }
+  }
+
+  // 6. Что обычно происходит с темпом после длинных остановок.
+  for(const x of ss){
+    const all=DATA[x.n].laps;
+    const events=restEpisodesAll(x.n).filter(e=>e.dur>=1800&&e.start>=periodStart()&&e.end<=periodEnd());
+    const deltas=[];
+    for(const e of events){
+      const before=all.filter(z=>z.lap<e.firstLap).slice(-10).map(z=>z.move).filter(v=>v>0&&v<1000);
+      const after=all.filter(z=>z.lap>e.lastLap).slice(0,10).map(z=>z.move).filter(v=>v>0&&v<1000);
+      if(before.length>=4&&after.length>=4){const b=median(before),a=median(after);deltas.push((a/b-1)*100)}
+    }
+    if(deltas.length>=2){
+      const d=median(deltas);
+      if(d<=-3){
+        add(87,`После длинных пауз ${surname(x.n)} обычно ускоряется`,
+          `В ${deltas.length} сопоставимых остановках медианный темп следующих 10 км был примерно на ${Math.round(-d)}% быстрее, чем перед отдыхом.`,'rest-effect');
+      }else if(d>=5){
+        add(84,`Длинные паузы не возвращают ${surname(x.n)} прежний темп`,
+          `После ${deltas.length} сопоставимых остановок следующие 10 км в медиане были примерно на ${Math.round(d)}% медленнее, чем до отдыха.`,'rest-effect');
+      }
+    }
+  }
+
+  // 7. Выраженная зависимость километража от времени суток.
+  const blockLabels=['12–18','18–24','00–06','06–12'];
+  for(const x of ss){
+    const vals=[0,0,0,0];
+    laps(x.n).forEach(z=>vals[blockIndex(z.hour)]++);
+    const norm=vals.map((v,i)=>{const occ=blockOccurrences(x.n,i);return occ>0?v/occ:0});
+    const order=norm.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v);
+    if(order[1]&&order[1].v>0&&order[0].v/order[1].v>=1.25&&order[0].v-order.at(-1).v>=4){
+      add(72,`${surname(x.n)} особенно продуктивен с ${blockLabels[order[0].i]}`,
+        `В этом окне он набирает в среднем ${fmt(order[0].v)} км за 6 часов – заметно больше, чем в другие части суток.`,'timeofday');
+    }
+  }
+
+  // Убираем почти одинаковые истории и показываем наиболее содержательные.
+  candidates.sort((a,b)=>b.score-a.score);
+  const picked=[],usedTags=new Map();
+  for(const c of candidates){
+    const n=usedTags.get(c.tag)||0;
+    const limit=(c.tag==='paradox'||c.tag==='rebound')?2:1;
+    if(n>=limit)continue;
+    picked.push(c);usedTags.set(c.tag,n+1);
+    if(picked.length>=6)break;
+  }
+
+  // Фолбэк для спокойных срезов: лучше нейтральный факт, чем натянутая история.
+  if(!picked.length&&leader){
+    picked.push({title:`${surname(leader.n)} – ${leader.total} км за период`,text:`Ходовой темп ${secToPace(leader.moveP)}/км, оценочный отдых – ${hms(leader.rest)}.`});
+  }
+
+  el.innerHTML=picked.map(x=>`<div class="insight"><b>${x.title}</b><span>${x.text}</span></div>`).join('');
 }
 async function loadFreshData(first=false){
  try{
